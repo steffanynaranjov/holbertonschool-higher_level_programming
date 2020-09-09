@@ -1,50 +1,76 @@
 #include "lists.h"
+listint_t *reverse_listint(listint_t **head);
+int compare(listint_t *list_1, listint_t *list_2);
 /**
-* return_node - return last node of the list
-* @head: head of the list
-*
-* Return: last node
-*/
-listint_t *return_node(listint_t *head)
+ * is_palindrome - Check is the listint is a Palindrome
+ * @head: type listint_s double pointer of node
+ *
+ * Return: 1 if is a pilndrome 0 if is not
+ */
+int is_palindrome(listint_t **head)
 {
-	listint_t *tmp = head;
-	void *prev = NULL;
+	listint_t *tmp_1, *tmp_2, *prev_tmp_1;
 
-	while (tmp)
+	tmp_1 = tmp_2 = prev_tmp_1 = *head;
+	if (*head && (*head)->next)
 	{
-		tmp->prev = prev;
-		prev = tmp;
+		while (tmp_2 && tmp_2->next)
+		{
+			tmp_2 = tmp_2->next->next;
+			prev_tmp_1 = tmp_1;
+			tmp_1 = tmp_1->next;
+		}
+		if (tmp_2)
+			tmp_1 = tmp_1->next;
 
-		tmp = tmp->next;
+		prev_tmp_1->next = NULL;
 	}
-
-	tmp = head;
-
-	while (tmp->next)
-		tmp = tmp->next;
-
-	return (tmp);
+	return (compare(*head, reverse_listint(&tmp_1)));
 }
 
 /**
-* is_palindrome - checks if the linked list is a palindrome
-* @head: head of the list
-*
-* Return: 0 or 1
-*/
-int is_palindrome(listint_t **head)
+ * reverse_listint - Reverses a listint_t linked list
+ * @head: Head
+ *
+ * Description: Reverses a listint_t linked list
+ * Return: A pointer to the first node of the reversed list
+ */
+listint_t *reverse_listint(listint_t **head)
 {
-	listint_t *last = return_node(*head);
-	listint_t *tmp = *head;
+	listint_t *head1, *tail;
 
-	while (tmp && last)
+	if (!head && !*head)
+		return (NULL);
+	head1 = *head;
+	*head = NULL;
+	while (head1)
 	{
-		if (last->n != tmp->n)
-			return (0);
-
-		last = last->prev;
-		tmp = tmp->next;
+		tail = head1;
+		head1 = head1->next;
+		tail->next = *head;
+		*head = tail;
 	}
+	return (*head);
+}
 
-	return (1);
+/**
+ * compare - Reverses a listint_t linked list
+ * @list_1: Linked list 1
+ * @list_2: Linked list 2
+ *
+ * Description: Reverses a listint_t linked list
+ * Return: 1 if is a pilndrome 0 if is not
+ */
+int compare(listint_t *list_1, listint_t *list_2)
+{
+	while (list_1 != NULL && list_2 != NULL)
+	{
+		if (list_1->n == list_2->n)
+			list_1 = list_1->next, list_2 = list_2->next;
+		else
+			return (0);
+	}
+	if (!list_1 && !list_2)
+		return (1);
+	return (0);
 }
