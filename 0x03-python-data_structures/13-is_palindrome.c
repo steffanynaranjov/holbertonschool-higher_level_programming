@@ -7,7 +7,7 @@
 */
 int is_palindrome(listint_t **head)
 {
-	int buffer[12];
+	int buffer[1000];
 	listint_t *tmp_node = *head;
 	int x, y, z;
 
