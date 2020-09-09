@@ -1,51 +1,35 @@
 #include "lists.h"
 /**
-* return_node - return last node of the list
-* @head: head of the list
+* check_palindrome - recursive function
+* @first: first node of list
+* @last: last node of list
 *
-* Return: last node of the list
+* Return: 0 or 1
 */
-listint_t *return_node(listint_t *head)
+int check_palindrome(listint_t **first, listint_t *last)
 {
-	listint_t *tmp = head;
-	void *prev = NULL;
+	if (last == NULL)
+		return (1);
 
-	while (tmp)
+	if (check_palindrome(first, last->next) == 1 && (*first)->n == last->n)
 	{
-		tmp->prev = prev;
-		prev = tmp;
-
-		tmp = tmp->next;
+		*first = (*first)->next;
+		return (1);
 	}
 
-	tmp = head;
-
-	while (tmp->next)
-		tmp = tmp->next;
-
-	return (tmp);
+	return (0);
 }
 
 /**
-* is_palindrome - checks if the linked list is a palindrome
-* @head: head of the list
+* is_palindrome - checks if a singly linked list is a palindrome
+* @head: list to check
 *
 * Return: 0 or 1
 */
 int is_palindrome(listint_t **head)
 {
-	listint_t *last = return_node(*head);
-	listint_t *tmp = *head;
+	if (head == NULL || *head == NULL || (*head)->next == NULL)
+		return (1);
 
-	while (tmp && last)
-	{
-
-		if (last->n != tmp->n)
-			return (0);
-
-		last = last->prev;
-		tmp = tmp->next;
-	}
-
-	return (1);
+	return (check_palindrome(head, *head));
 }
