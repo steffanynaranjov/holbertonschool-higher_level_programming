@@ -1,11 +1,11 @@
 #include "lists.h"
 /**
-* return_node - return last node of the list
-* @head: head of the linked list
-*
-* Return: last node
-*/
-listint_t *return_node(listint_t *head)
+ * get_last - return last node of the list
+ * @head: head of the list
+ *
+ * Return: last node
+ */
+listint_t *get_last(listint_t *head)
 {
 	listint_t *tmp = head;
 	void *prev = NULL;
@@ -27,14 +27,14 @@ listint_t *return_node(listint_t *head)
 }
 
 /**
-* is_palindrome - checks if the linked list is a palindrome
-* @head: head of the linked list
-*
-* Return: 0 or 1
-*/
+ * is_palindrome - checks if a singly linked list is a palindrome
+ * @head: head of the list
+ *
+ * Return: 0 if it is not a palindrome, 1 if it is a palindrome
+ */
 int is_palindrome(listint_t **head)
 {
-	listint_t *last = return_node(*head);
+	listint_t *last = get_last(*head);
 	listint_t *tmp = *head;
 
 	while (tmp && last)
