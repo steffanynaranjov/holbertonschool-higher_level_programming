@@ -9,11 +9,11 @@ int is_palindrome(listint_t **head)
 {
 	int buffer[12];
 	listint_t *tmp_node = *head;
-	int x = 0, y = 0, z;
+	int x, y, z;
 
 	if (tmp_node == NULL)
 		return (1);
-
+	x = 0;
 	while (tmp_node)
 	{
 		buffer[x] = tmp_node->n;
@@ -23,7 +23,7 @@ int is_palindrome(listint_t **head)
 	z = (x + 1) / 2;
 	x = x - 1;
 
-	for (; y < z; y++, x--)
+	for (y = 0; y < z; y++, x--)
 	{
 		if (buffer[y] != buffer[x])
 			return (0);
