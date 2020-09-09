@@ -7,23 +7,23 @@
 */
 listint_t *return_node(listint_t *head)
 {
-	listint_t *tmp_node = head;
+	listint_t *tmp = head;
 	void *prev = NULL;
 
-	while (tmp_node)
+	while (tmp)
 	{
-		tmp_node->prev = prev;
-		prev = tmp_node;
+		tmp->prev = prev;
+		prev = tmp;
 
-		tmp_node = tmp_node->next;
+		tmp = tmp->next;
 	}
 
-	tmp_node = head;
+	tmp = head;
 
-	while (tmp_node->next)
-		tmp_node = tmp_node->next;
+	while (tmp->next)
+		tmp = tmp->next;
 
-	return (tmp_node);
+	return (tmp);
 }
 
 /**
@@ -35,16 +35,16 @@ listint_t *return_node(listint_t *head)
 int is_palindrome(listint_t **head)
 {
 	listint_t *last = return_node(*head);
-	listint_t *tmp_node = *head;
+	listint_t *tmp = *head;
 
-	while (tmp_node && last)
+	while (tmp && last)
 	{
 
-		if (last->n != tmp_node->n)
+		if (last->n != tmp->n)
 			return (0);
 
 		last = last->prev;
-		tmp_node = tmp_node->next;
+		tmp = tmp->next;
 	}
 
 	return (1);
