@@ -5,7 +5,9 @@ class Square:
     "Def"
     def __init__(self, size):
         """The initialization method of the square class
+
         Args:
             size: Is the type int private attribute
+
         """
         self.__size = size
