@@ -8,13 +8,13 @@ class Square:
          """The initialization method of the square class
         Args:
             size (int): Is the type int private attribute
-        Raise:
+        Raises:
          TypeError: If size is not an integer
          ValueError: If size is less than 0
          """
-        self.__size = size
-        if not isinstance(self.__size, int):
-            raise TypeError("size must be an integer")
-
-        if self.__size < 0:
-            raise ValueError("size must be >= 0")
+         if not isinstance(size, int):
+             raise TypeError("size must be an integer")
+         if size < 0:
+             raise ValueError("size must be >= 0")
+         else:
+             self.__size = size
