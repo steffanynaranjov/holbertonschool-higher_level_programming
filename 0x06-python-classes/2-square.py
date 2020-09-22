@@ -2,15 +2,18 @@
 """This is a class Square defined by size."""
 
 
-class Square():
-    """Def"""
+class Square:
+    """Inizialitation class"""
     def __init__(self, size=0):
          """The initialization method of the square class
-        Args:
+
+         Args:
             size (int): Is the type int private attribute
+
         Raises:
          TypeError: If size is not an integer
          ValueError: If size is less than 0
+
          """
          self.__size = size
          if not isinstance(size, int):
