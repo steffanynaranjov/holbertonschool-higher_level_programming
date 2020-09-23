@@ -4,7 +4,7 @@
 
 class Square:
     """Inizialitation class"""
-    def __init__(self, size=0):
+    def __init__(self, size=0, position=(0, 0)):
         """The initialization method of the square class
         Args:
             size (int): Is the type int private attribute
@@ -13,6 +13,7 @@ class Square:
             ValueError: If size is less than 0
         """
         self.size = size
+        self.position = position
 
     @property
     def size(self):
