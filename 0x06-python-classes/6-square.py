@@ -8,6 +8,8 @@ class Square:
         """The initialization method of the square class
         Args:
             size (int): Is the type int private attribute
+            position (int, int): Private attribute of new square
+
         Raises:
             TypeError: If size is not an integer
             ValueError: If size is less than 0
@@ -44,7 +46,7 @@ class Square:
                 not all(isinstance(x, int) for x in value) or
                 not all(x >= 0 for x in value)):
             raise TypeError("position must be a tuple of 2 positive integers")
-
+        else:
             self.__position = value
 
     def area(self):
@@ -52,10 +54,16 @@ class Square:
         return self.__size ** 2
 
     def my_print(self):
-        """Print the square with the character #"""
-        if not self.__size:
+        """ Prints in stdout the square with the character #
+        """
+        if self.__size == 0:
             print()
-        for i in range(self.__size):
-            for j in range(self.__size):
-                print("#", end="")
-            print()
+        else:
+            for i in range(self.__position[1]):
+                print()
+            for i in range(self.__size):
+                for k in range(self.__position[0]):
+                    print(" ", end="")
+                for j in range(self.__size):
+                    print("#", end="")
+                print()
