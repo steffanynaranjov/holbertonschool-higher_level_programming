@@ -1,5 +1,6 @@
 <h1 class="gap">0x07. Python - Test-driven development</h1>
 
+  <article id="description" class="gap formatted-content">
     <p><img src="https://s3.amazonaws.com/intranet-projects-files/holbertonschool-higher-level_programming+/246/giphy-4.gif" alt="" style="" /></p>
 
 <h2>Resources</h2>
