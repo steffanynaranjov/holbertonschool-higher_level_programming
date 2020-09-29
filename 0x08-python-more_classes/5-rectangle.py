@@ -1,7 +1,6 @@
  #!/usr/bin/python3
 """
 Class Rectangle Empty
-
 """
 
 
@@ -60,7 +59,7 @@ class Rectangle:
         """use the # to make a rectangle"""
         if self.width == 0 or self.height == 0:
             return ("")
-        rec = ((("#" * self.__width) + "\n") * self.height)[:-1]
+        rec = (("#" * self.__width + "\n") * self.height)[:-1]
         return rec
 
     def __repr__(self):
@@ -69,5 +68,5 @@ class Rectangle:
         return rec
 
     def __del__(self):
-        """Delete the rec"""
+        """Delete the re"""
         print("Bye rectangle...")
