@@ -1,6 +1,7 @@
  #!/usr/bin/python3
 """
 Class Rectangle Empty
+
 """
 
 
@@ -69,4 +70,4 @@ class Rectangle:
 
     def __del__(self):
         """Delete"""
-        print("Bye rectangle...")
+        print("Bye rectangle. . .")
