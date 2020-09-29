@@ -63,9 +63,8 @@ class Rectangle:
         """use the # to make a rectangle"""
         if self.width == 0 or self.height == 0:
             return ("")
-        rectan = (((str(self.print_symbol) * self.__width) + "\n") * self.__height)
-        rectan = rectan[:-1]
-        return rectan
+        re = (((str(self.print_symbol) * self.__width) + '\n') * self.__height)
+        return (re[:-1])
 
     def __repr__(self):
         """Representation"""
@@ -73,6 +72,6 @@ class Rectangle:
         return rec
 
     def __del__(self):
-        """Delete the rec"""
+        """Delete"""
         print("Bye rectangle...")
         Rectangle.number_of_instances -= 1
