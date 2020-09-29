@@ -7,6 +7,7 @@ Class Rectangle Empty
 class Rectangle:
     """Class rectangle"""
     number_of_instances = 0
+
     def __init__(self, width=0, height=0):
         """The __init__ method of the class
         Args:
@@ -72,3 +73,4 @@ class Rectangle:
     def __del__(self):
         """Delete"""
         print("Bye rectangle...")
+        Rectangle.number_of_instances -= 1
