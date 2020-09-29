@@ -7,7 +7,7 @@ Class Rectangle Empty
 class Rectangle:
     """Class rectangle"""
     number_of_instances = 0
-    print_symbol = "#"
+    print_symbol = '#'
 
     def __init__(self, width=0, height=0):
         """The __init__ method of the class
@@ -63,7 +63,7 @@ class Rectangle:
         """use the # to make a rectangle"""
         if self.width == 0 or self.height == 0:
             return ("")
-        rectan = ((str(self.print_symbol) * self.__width + "\n") * self.__height)
+        rectan = (((str(self.print_symbol) * self.__width) + "\n") * self.__height)
         rectan = rectan[:-1]
         return rectan
 
