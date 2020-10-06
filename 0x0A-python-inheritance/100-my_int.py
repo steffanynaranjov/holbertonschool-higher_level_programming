@@ -6,10 +6,10 @@ MyInt module
 
 class MyInt(int):
     """subclass MyInt from class int"""
-    def __eq__(self, other):
-        """Compare equal / different to other"""
+    def __equal__(self, other):
+        """Compare equal or  different to other"""
         return (int(self) != int(other))
 
-    def __ne__(self, other):
-        """Compare equal / different to other"""
+    def __diff__(self, other):
+        """Compare equal or different to other"""
         return (int(self) == int(other))
