@@ -10,6 +10,6 @@ class MyInt(int):
         """Compare equal / different to other"""
         return (int(self) != int(other))
 
-    def __di__(self, other):
+    def __ne__(self, other):
         """Compare equal / different to other"""
         return (int(self) == int(other))
