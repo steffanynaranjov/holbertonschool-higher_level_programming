@@ -1,15 +1,15 @@
 #!/usr/bin/python3
 """
-Module My Int
+MyInt module
 """
 
 
 class MyInt(int):
-    """This is a subclass from class int"""
-    def __equal__(self, other):
-        """Compare if is equal or different to other"""
+    """subclass MyInt from class int"""
+    def __eq__(self, other):
+        """Compare equal / different to other"""
         return (int(self) != int(other))
 
-    def __different__(self, other):
-        """Compare if is  equal or different to other"""
+    def __ne__(self, other):
+        """Compare equal / different to other"""
         return (int(self) == int(other))
