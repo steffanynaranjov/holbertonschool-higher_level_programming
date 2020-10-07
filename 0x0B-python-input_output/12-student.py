@@ -23,12 +23,14 @@ class Student:
         if not isinstance(attrs, list):
             return self.__dict__
 
-        for x in attrs:
-            if not isinstance(x, str):
+        for var in attrs:
+            if not isinstance(var, str):
                 return self.__dict__
 
-        m_dict = self.__dict__
-        n_dict = {
-            attr: m_dict for attr in attrs if attr in self.__dict__.keys()
+        my_dict = self.__dict__
+
+        new_dict = {
+            attr: my_dict for attr in attrs if attr in self.__dict__.keys()
         }
-        return n_dict
+
+        return new_dict
