@@ -20,17 +20,7 @@ class Student:
         """
         Return the attribute of a object
         """
-        if not isinstance(attrs, list):
-            return self.__dict__
-
-        for var in attrs:
-            if not isinstance(var, str):
-                return self.__dict__
-
-        my_dict = self.__dict__
-
-        new_dict = {
-            attr: my_dict for attr in attrs if attr in self.__dict__.keys()
-        }
-
-        return new_dict
+        if (isinstance(attrs, list) and
+                all(isinstance(i, str) for i in attrs)):
+            return {i: getattr(self, i) for i in attrs if hasattr(self, i)}
+        return self.__dict__
