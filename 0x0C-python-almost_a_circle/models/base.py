@@ -78,34 +78,3 @@ class Base:
             with open(filename, mode="r", encoding="utf-8") as f:
                 l_d = [cls.create(**d)for d in cls.from_json_string(f.read())]
         return l_d
-
-    @classmethod
-    def save_to_file_csv(cls, list_objs):
-        filen = "{}.csv".format(cls.__name__)
-        list_dic = []
-        if cls.__name__ == "Rectangle":
-            fieldnames = ["id", "width", "height", "x", "y"]
-        elif cls.__name__ == "Square":
-            fieldnames = ["id", "size", "x", "y"]
-        with open(filen, mode="w", newline="") as csvfile:
-            writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
-            [writer.writerow(obj.to_dictionary())for obj in list_objs]
-
-    @classmethod
-    def load_from_file_csv(cls):
-        """
-        load CSV files
-        """
-        filen = "{}.csv".format(cls.__name__)
-        list_dic = []
-        if os.path.exists(filen):
-            if cls.__name__ == "Rectangle":
-                fieldnames = ["id", "width", "height", "x", "y"]
-            elif cls.__name__ == "Square":
-                fieldnames = ["id", "size", "x", "y"]
-            with open(filen, newline='') as csvfile:
-                list_dic = csv.DictReader(csvfile, fieldnames=fieldnames)
-                list_dic = [dict([k, int(v)]for k, v in obj.items())
-                             for obj in list_dic]
-                list_dic = [cls.create(**dict)for dict in list_dic]
-        return list_dic
