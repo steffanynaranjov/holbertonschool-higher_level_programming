@@ -70,14 +70,11 @@ class Base:
         new file load
         """
         filename = "{}.json".format(cls.__name__)
-        ins_list = []
-        if os.path.isfile(filename):
-            with open(filename) as f:
-                ins_object = cls.from_json_string(f.read())
-                for ins_dict in ins_object:
-                    ins_list.append(cls.create(**ins_dict))
-                return ins_list
-            return []
+        l_dir = []
+        if os.path.exists(filename):
+            with open(filename, mode="r", encoding="utf-8") as f:
+                l_dir = [cls.create(**d)for d in cls.from_json_string(f.read())]
+        return l_dir
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
