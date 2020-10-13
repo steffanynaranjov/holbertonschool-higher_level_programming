@@ -81,9 +81,6 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        """
-        class save
-        """
         filen = "{}.csv".format(cls.__name__)
         list_dic = []
         if cls.__name__ == "Rectangle":
@@ -96,9 +93,6 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
-        """
-        load filename
-        """
         filen = "{}.csv".format(cls.__name__)
         list_dic = []
         if os.path.exists(filen):
