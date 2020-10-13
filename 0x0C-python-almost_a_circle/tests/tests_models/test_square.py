@@ -1,100 +1,50 @@
 #!/usr/bin/python3
 """Unittest for Square module"""
-import unittest
-import io
-import contextlib
-from models.base import Base
+
 from models.square import Square
+from unittest import TestCase
 
 
-class TestSquare(unittest.TestCase):
-    """
-    This is the class unittest for the max integer function
-    """
-    def setUp(self):
-        Base._Base__nb_objects = 0
+class TestSquare(TestCase):
+    def test_size_get(self):
+        """ Test's for size method """
 
-    def test_Square_class(self):
-        R = Square(1)
-        self.assertIsInstance(R, Square)
+        s1 = Square(10, 5, 3, 1)
+        self.assertEqual(s1.size, 10)
 
-    def test_Square_id(self):
-        R = Square(1)
-        r = Square(2)
-        self.assertEqual(r.id, 2)
+    def test_size_set(self):
+        """ Test's for size method """
 
-    def test_Square_id_increase(self):
-        R = Square(1)
-        r = Square(2)
-        r1 = Square(3)
-        self.assertEqual(r1.id, 3)
+        s1 = Square(10, 5, 3, 1)
+        s1.size = 100
 
-    def test_Square_id2(self):
-        r1 = Square(4, id=12)
-        self.assertEqual(r1.id, 12)
-        self.assertEqual(r1.size, 4)
+        self.assertEqual(s1.size, 100)
 
-    def test_subclass_Square(self):
-        self.assertTrue(issubclass(Square, Base))
+    def test_y_not_int(self):
+        """ Test's for y method """
 
-    def test_Square_size_error(self):
-        with self.assertRaises(ValueError):
-            r1 = Square(-1)
+        r1 = Square(3, 4, 0, 0)
+
         with self.assertRaises(TypeError):
-            r1 = Square("1")
+            r1.y = "51"
 
-    def test_Square_x_error(self):
-        with self.assertRaises(ValueError):
-            r1 = Square(4, -2)
-        with self.assertRaises(TypeError):
-            r1 = Square(4, "2")
+    def test_update(self):
+        """ Test's for update method """
 
-    def test_Square_y_error(self):
-        with self.assertRaises(ValueError):
-            r1 = Square(4, 2, -2)
-        with self.assertRaises(TypeError):
-            r1 = Square(4, 2, "2")
+        s1 = Square(10, 5, 3, 1)
+        s1.update(11, 6, 4, 2)
 
-    def test_area_Square(self):
-        r = Square(4)
-        self.assertEqual(r.area(), 16)
-        r1 = Square(12, 2, 1, 1)
-        self.assertEqual(r1.area(), 144)
+        self.assertEqual(s1.id, 11)
 
-    def test_update1_Square(self):
-        r = Square(1)
-        r.update(89, 2, 2, 2)
-        self.assertEqual(r.size, 2)
-        self.assertEqual(r.x, 2)
-        self.assertEqual(r.y, 2)
-        self.assertEqual(r.id, 89)
+        self.assertEqual(s1.size, 6)
 
-    def test_update2_Square(self):
-        r = Square(1, 1)
-        r.update(x=2, y=3, id=4, size=5)
-        self.assertEqual(r.size, 5)
-        self.assertEqual(r.x, 2)
-        self.assertEqual(r.y, 3)
-        self.assertEqual(r.id, 4)
+        self.assertEqual(s1.x, 4)
+        self.assertEqual(s1.y, 2)
 
-    def test_to_dictionary_Square(self):
-        r = Square(89, 1, 1, 1)
-        self.assertEqual(dict, type(r.to_dictionary()))
+    def test_to_dictionary(self):
+        """ Test's for to_dictionary method """
 
-    def test_display_Square(self):
-        r = Square(1)
-        draw = "#\n"
-        f = io.StringIO()
-        with contextlib.redirect_stdout(f):
-            r.display()
-        self.assertEqual(f.getvalue(), draw)
-        r1 = Square(2)
-        draw = "##\n##\n"
-        f = io.StringIO()
-        with contextlib.redirect_stdout(f):
-            r1.display()
-        self.assertEqual(f.getvalue(), draw)
+        test_dict = {'id': 1, 'size': 4, 'x': 2, 'y': 1}
+        r1 = Square(4, 2, 1, 1)
 
-
-if __name__ == '__main__':
-    unittest.main()
+        self.assertEqual(test_dict, r1.to_dictionary())

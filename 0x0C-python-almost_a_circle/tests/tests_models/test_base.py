@@ -1,46 +1,50 @@
 #!/usr/bin/python3
-"""Unittest for Base module"""
-import unittest
+""" Test's for base class """
+
+from unittest import TestCase
 from models.base import Base
-from models.square import Square
-from models.rectangle import Rectangle
 
 
-class TestBase(unittest.TestCase):
-    """
-    This is the class unittest for the max integer function
-    """
-    def setUp(self):
-        Base._Base__nb_objects = 0
+class TestBase(TestCase):
+    """ Test's for base class methods """
 
-    def test_Base_class(self):
-        B = Base()
-        self.assertIsInstance(B, Base)
+    def test___init__(self):
+        """ Test's for init method """
 
-    def test_Base_id(self):
-        b = Base()
-        self.assertEqual(b.id, 1)
+        self.assertTrue(Base.__init__.__doc__)
+        self.assertEqual(Base().id, 1)
+        self.assertEqual(Base(12).id, 12)
+        self.assertEqual(Base("2").id, "2")
+        self.assertEqual(Base().id, 2)
 
-    def test_Base_id_increase(self):
-        b = Base()
-        b1 = Base()
-        self.assertEqual(b1.id, 2)
+    def test_to_json_string(self):
+        """ Test's for to_json_string method """
 
-    def test_Base_id2(self):
-        b = Base()
-        b1 = Base(12)
-        self.assertEqual(b1.id, 12)
+        json_string = Base().to_json_string({"id": 5191, "test": 1})
+        self.assertEqual(type(json_string), type("test"))
+        self.assertRegex(json_string, "\"id\": 5191")
+        self.assertRegex(json_string, "\"test\": 1")
 
-    def test_Base_str(self):
-        b = Base("Foo")
-        self.assertEqual("Foo", b.id)
+    def test_save_to_file(self):
+        """ Test's for save_to_file method """
 
-    def test_subclass_rectangle(self):
-        self.assertTrue(issubclass(Rectangle, Base))
+        self.assertTrue(Base.save_to_file.__doc__)
 
-    def test_subclass_square(self):
-        self.assertTrue(issubclass(Square, Base))
+    def test_from_json_string(self):
+        """ Test's for from_json_string method """
 
+        json_string = Base().to_json_string({"id": 5191, "test": 1})
+        self.assertTrue(Base.from_json_string.__doc__)
+        resp = Base.from_json_string(json_string)
+        self.assertEqual(resp["id"], 5191)
+        self.assertEqual(resp["test"], 1)
 
-if __name__ == '__main__':
-    unittest.main()
+    def test_create(self):
+        """ Test's for create method """
+
+        self.assertTrue(Base.create.__doc__)
+
+    def test_load_from_file(self):
+        """ Test's for load_from_file method """
+
+        self.assertTrue(Base.load_from_file.__doc__)

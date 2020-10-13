@@ -1,111 +1,134 @@
 #!/usr/bin/python3
-"""
-Unittest for Rectangle module
-"""
-import unittest
-import io
-import contextlib
-from models.base import Base
+""" Test's for rectangle class """
+
 from models.rectangle import Rectangle
+from unittest import TestCase
+from io import StringIO
+import sys
 
 
-class TestRectangle(unittest.TestCase):
-    """
-    This is the class unittest for the max integer function
-    """
-    def setUp(self):
-        Base._Base__nb_objects = 0
+class TestRectangle(TestCase):
+    """ Test's for base class methods """
 
-    def test_Rectangle_class(self):
-        R = Rectangle(1, 1)
-        self.assertIsInstance(R, Rectangle)
+    def test___init__(self):
+        """ Test's for init method """
+        r2 = Rectangle(3, 4, 6, 1, 5)
 
-    def test_Rectangle_id(self):
-        R = Rectangle(1, 1)
-        r = Rectangle(2, 2)
-        self.assertEqual(r.id, 2)
+        self.assertTrue(Rectangle.__init__.__doc__)
+        self.assertEqual(r2.id, 5)
 
-    def test_Rectangle_id_increase(self):
-        R = Rectangle(1, 1)
-        r = Rectangle(2, 2)
-        r1 = Rectangle(3, 3)
-        self.assertEqual(r1.id, 3)
+        self.assertEqual(r2.height, 4)
+        self.assertEqual(r2.width, 3)
 
-    def test_Rectangle_id2(self):
-        r1 = Rectangle(4, 4, id=12)
-        self.assertEqual(r1.id, 12)
-        self.assertEqual(r1.width, 4)
-        self.assertEqual(r1.height, 4)
+        self.assertEqual(r2.x, 6)
+        self.assertEqual(r2.y, 1)
 
-    def test_subclass_rectangle(self):
-        self.assertTrue(issubclass(Rectangle, Base))
+    def test_height(self):
+        """ Test's for height method """
 
-    def test_Rectangle_width_error(self):
-        with self.assertRaises(ValueError):
-            r1 = Rectangle(-1, 2)
+        r1 = Rectangle(3, 4, 0, 0)
+        r1.height = 5191
+
+        self.assertTrue(Rectangle.height.__doc__)
+        self.assertEqual(r1.height, 5191)
+
+    def test_height_not_int(self):
+        """ Test's for y method """
+
+        r1 = Rectangle(3, 4, 0, 0)
+
         with self.assertRaises(TypeError):
-            r1 = Rectangle("1", 2)
+            r1.height = "51"
 
-    def test_Rectangle_height_error(self):
-        with self.assertRaises(ValueError):
-            r1 = Rectangle(1, -2)
+    def test_width(self):
+        """ Test's for width method """
+
+        r1 = Rectangle(3, 4, 0, 0)
+        r1.width = 5191
+
+        self.assertTrue(Rectangle.width.__doc__)
+        self.assertEqual(r1.width, 5191)
+
+    def test_width_not_int(self):
+        """ Test's for y method """
+
+        r1 = Rectangle(3, 4, 0, 0)
+
         with self.assertRaises(TypeError):
-            r1 = Rectangle(1, "2")
+            r1.width = "51"
 
-    def test_Rectangle_x_error(self):
-        with self.assertRaises(ValueError):
-            r1 = Rectangle(4, 4, -2)
+    def test_x(self):
+        """ Test's for x method """
+
+        r1 = Rectangle(3, 4, 0, 0)
+        r1.x = 5191
+
+        self.assertTrue(Rectangle.x.__doc__)
+        self.assertEqual(r1.x, 5191)
+
+    def test_x_not_int(self):
+        """ Test's for y method """
+
+        r1 = Rectangle(3, 4, 0, 0)
+
         with self.assertRaises(TypeError):
-            r1 = Rectangle(4, 4, "2")
+            r1.x = "51"
 
-    def test_Rectangle_y_error(self):
-        with self.assertRaises(ValueError):
-            r1 = Rectangle(4, 4, 2, -2)
+    def test_y(self):
+        """ Test's for y method """
+
+        r1 = Rectangle(3, 4, 0, 0)
+        r1.y = 5191
+
+        self.assertTrue(Rectangle.y.__doc__)
+        self.assertEqual(r1.y, 5191)
+
+    def test_y_not_int(self):
+        """ Test's for y method """
+
+        r1 = Rectangle(3, 4, 0, 0)
+
         with self.assertRaises(TypeError):
-            r1 = Rectangle(4, 4, 2, "2")
+            r1.y = "51"
 
-    def test_area_Rectangle(self):
-        r = Rectangle(4, 4)
-        self.assertEqual(r.area(), 16)
-        r1 = Rectangle(12, 2, 8, 1, 1)
-        self.assertEqual(r1.area(), 24)
+    def test_area(self):
+        """ Test's for area method """
 
-    def test_update1_Rectangle(self):
-        r = Rectangle(1, 1)
-        r.update(89, 2, 2, 2, 2)
-        self.assertEqual(r.width, 2)
-        self.assertEqual(r.height, 2)
-        self.assertEqual(r.x, 2)
-        self.assertEqual(r.y, 2)
-        self.assertEqual(r.id, 89)
+        r1 = Rectangle(3, 4, 0, 0)
 
-    def test_update2_Rectangle(self):
-        r = Rectangle(1, 1)
-        r.update(x=2, y=3, id=4, width=5, height=6)
-        self.assertEqual(r.width, 5)
-        self.assertEqual(r.height, 6)
-        self.assertEqual(r.x, 2)
-        self.assertEqual(r.y, 3)
-        self.assertEqual(r.id, 4)
+        self.assertEqual(r1.area(), 12)
 
-    def test_to_dictionary_Rectangle(self):
-        r = Rectangle(89, 1, 1, 1, 1)
-        self.assertEqual(dict, type(r.to_dictionary()))
+    def test_display(self):
+        """ Test's for display method """
 
-    def test_display_Rectangle(self):
-        r = Rectangle(1, 1)
-        draw = "#\n"
-        f = io.StringIO()
-        with contextlib.redirect_stdout(f):
-            r.display()
-        self.assertEqual(f.getvalue(), draw)
-        r1 = Rectangle(3, 2)
-        draw = "###\n###\n"
-        f = io.StringIO()
-        with contextlib.redirect_stdout(f):
-            r1.display()
-        self.assertEqual(f.getvalue(), draw)
+        local_stdout = StringIO()
+        sys.stdout = local_stdout
 
+        r1 = Rectangle(3, 2, 1, 2)
+        r1.display()
 
-if __name__ == '__main__':
-    unittest.main()
+        sys.stdout = sys.__stdout__
+        value = local_stdout.getvalue()
+        self.assertEqual("\n\n ###\n ###\n", value)
+
+    def test_update(self):
+        """ Test's for update method """
+
+        r1 = Rectangle(3, 2, 1, 2)
+        r1.update(5, 6, 7, 8, 9)
+
+        self.assertEqual(r1.id, 5)
+
+        self.assertEqual(r1.width, 6)
+        self.assertEqual(r1.height, 7)
+
+        self.assertEqual(r1.x, 8)
+        self.assertEqual(r1.y, 9)
+
+    def test_to_dictionary(self):
+        """ Test's for to_dictionary method """
+
+        test_dict = {'id': 5, 'width': 4, 'height': 3, 'x': 2, 'y': 1}
+        r1 = Rectangle(4, 3, 2, 1, 5)
+
+        self.assertEqual(test_dict, r1.to_dictionary())
