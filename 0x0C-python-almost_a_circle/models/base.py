@@ -90,8 +90,8 @@ class Base:
             [writer.writerow(obj.to_dictionary())for obj in list_objs]
 
     @classmethod
-    """load from file"""
     def load_from_file_csv(cls):
+        """load filename"""
         filen = "{}.csv".format(cls.__name__)
         list_dic = []
         if os.path.exists(filen):
