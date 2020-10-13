@@ -78,28 +78,31 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
-        f = "{}.csv".format(cls.__name__)
-        list_dict = []
+        """
+        class save
+        """
+        filen = "{}.csv".format(cls.__name__)
+        list_dic = []
         if cls.__name__ == "Rectangle":
             fieldnames = ["id", "width", "height", "x", "y"]
         elif cls.__name__ == "Square":
             fieldnames = ["id", "size", "x", "y"]
-        with open(f, mode="w", newline='') as csvfile:
+        with open(filen, mode="w", newline="") as csvfile:
             writer = csv.DictWriter(csvfile, fieldnames=fieldnames)
             [writer.writerow(obj.to_dictionary())for obj in list_objs]
 
     @classmethod
     def load_from_file_csv(cls):
-        """
-        Load CSV files
-        """
-        list_t = []
-        if os.path.isfile(cls.__name__ + ".csv"):
-            with open(cls.__name__ + ".csv",
-                      encoding="utf-8") as csv_file:
-                csv_write = csv.DictReader(csv_file)
-                for dic in csv_write:
-                    for k, value in dic.items():
-                        dic[k] = int(value)
-                    list_t.append(cls.create(**dic))
-                return list_t
+        filen = "{}.csv".format(cls.__name__)
+        list_dic = []
+        if os.path.exists(filen):
+            if cls.__name__ == "Rectangle":
+                fieldnames = ["id", "width", "height", "x", "y"]
+            elif cls.__name__ == "Square":
+                fieldnames = ["id", "size", "x", "y"]
+            with open(filen, newline='') as csvfile:
+                list_dic = csv.DictReader(csvfile, fieldnames=fieldnames)
+                list_dic = [dict([k, int(v)]for k, v in obj.items())
+                             for obj in list_dic]
+                list_dic = [cls.create(**dict)for dict in list_dic]
+        return list_dic
