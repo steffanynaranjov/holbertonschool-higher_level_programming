@@ -26,6 +26,9 @@ class Base:
 
     @staticmethod
     def to_json_string(list_dictionaries):
+        """
+        to json
+        """
         if list_dictionaries and len(list_dictionaries) != 0:
             return json.dumps(list_dictionaries)
         return "[]"
@@ -78,6 +81,9 @@ class Base:
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
+        """
+        save filem
+        """
         filen = "{}.csv".format(cls.__name__)
         list_dic = []
         if cls.__name__ == "Rectangle":
@@ -90,6 +96,9 @@ class Base:
 
     @classmethod
     def load_from_file_csv(cls):
+        """
+        load filen
+        """
         filen = "{}.csv".format(cls.__name__)
         list_dic = []
         if os.path.exists(filen):
