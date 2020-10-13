@@ -77,6 +77,7 @@ class Base:
                 for ins_dict in ins_object:
                     ins_list.append(cls.create(**ins_dict))
                 return ins_list
+            return []
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
