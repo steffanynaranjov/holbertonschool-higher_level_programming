@@ -77,9 +77,6 @@ class Base:
         return l_d
 
     @classmethod
-    """
-    save cvs file
-    """
     def save_to_file_csv(cls, list_objs):
         f = "{}.csv".format(cls.__name__)
         list_dict = []
