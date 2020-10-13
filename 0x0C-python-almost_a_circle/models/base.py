@@ -67,14 +67,14 @@ class Base:
     @classmethod
     def load_from_file(cls):
         """
-        new file load
+        load a new class
         """
         filename = "{}.json".format(cls.__name__)
-        l_dir = []
+        l_d = []
         if os.path.exists(filename):
             with open(filename, mode="r", encoding="utf-8") as f:
-                l_dir = [cls.create(**d)for d in cls.from_json_string(f.read())]
-        return l_dir
+                l_d = [cls.create(**d)for d in cls.from_json_string(f.read())]
+        return l_d
 
     @classmethod
     def save_to_file_csv(cls, list_objs):
