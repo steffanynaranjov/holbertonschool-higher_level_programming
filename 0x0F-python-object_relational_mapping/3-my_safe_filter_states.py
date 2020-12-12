@@ -9,15 +9,12 @@ import MySQLdb
 if __name__ == "__main__":
     conn = MySQLdb.connect(host="localhost", port=3306, user=sys.argv[1],
                            passwd=sys.argv[2], db=sys.argv[3])
-    cu = conn.cursor()
+    cur = conn.cursor()
 
-    cu.execute('SELECT * FROM states WHERE name LIKE BINARY %s ORDER BY id;',
-               (argv[4],))
+    q = "SELECT stated.id, name FROM stated WHERE BINARY name = %s"
+    state_name = sys.argv[4]
+    cur.execute(q, (state_name,))
+    [print(state) for state in cur.fetchall()]
 
-    row = cu.fetchall()
-
-    for r in rows:
-        print(r)
-
-    cu.close()
+    cur.close()
     conn.close()
