@@ -1,7 +1,9 @@
 #!/usr/bin/node
-const newVar = process.argv.slice(2);
-if (!newVar.length || newVar.length === 1) {
+const newVar = process.argv;
+if (newVar.length <= 3) {
   console.log('0');
 } else {
-  console.log(newVar.sort().reverse()[1]);
+  newVar.splice(0, 2);
+  newVar.sort(function (a, b) { return b - a; });
+  console.log(Number(newVar[1]));
 }
