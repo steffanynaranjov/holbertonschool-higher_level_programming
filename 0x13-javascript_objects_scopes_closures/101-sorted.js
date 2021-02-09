@@ -1,5 +1,11 @@
 #!/usr/bin/node
-const fs = require('fs');
-const f1 = fs.readFileSync(process.argv[2], 'utf8');
-const f2 = fs.readFileSync(process.argv[3], 'utf8');
-fs.writeFileSync(process.argv[4], f1 + f2, 'utf-8');
+const dict = require('./101-data').dict;
+const newDict = {};
+for (const [key, value] of Object.entries(dict)) {
+  if (newDict[value] !== undefined) {
+    newDict[value].push(key);
+  } else {
+    newDict[value] = [key];
+  }
+}
+console.log(newDict);
